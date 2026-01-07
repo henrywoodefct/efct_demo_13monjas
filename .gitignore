@@ -1,0 +1,15 @@
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Local runtime artifacts
+data/efct.db
+outputs/
+
+# Virtual env
+.venv/
+venv/
+
+# IDE / OS
+.vscode/
+.DS_Store
