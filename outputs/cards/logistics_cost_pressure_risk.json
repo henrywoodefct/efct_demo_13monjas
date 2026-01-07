@@ -1,0 +1,61 @@
+{
+  "schema_version": "ui-ready-v1",
+  "site_id": "13monjas",
+  "site_name": "13 Monjas",
+  "generated_at_local": "2026-01-06T21:35:24.719659-05:00",
+  "service_window_local": {
+    "start": "16:00",
+    "end": "23:00"
+  },
+  "insight": {
+    "id": "logistics_cost_pressure_risk",
+    "title": "Logistics Cost Pressure Risk",
+    "category": "Logistics",
+    "time_horizon": "7–30d",
+    "status": {
+      "level": "Normal",
+      "icon": "🟢",
+      "score_0_100": 5,
+      "subtitle": "External cost signals look stable.",
+      "confidence": 0.85,
+      "confidence_reason": "Food inflation series available (BCRPData). Transport cost proxy series available (BCRPData). FX series available; volatility computed from recent daily data."
+    },
+    "summary": "External indicators (food inflation, transport cost pressure, and FX volatility) suggest how likely suppliers are to reprice or tighten terms in the coming weeks.",
+    "drivers": [
+      "Macro cost indicators are within normal ranges; repricing risk appears low."
+    ],
+    "implications": [
+      "Higher cost pressure can reduce price-lock windows and increase quote variability.",
+      "Margin sensitivity rises on imported or freight-heavy inputs during Elevated/Critical periods."
+    ],
+    "supported_considerations": [
+      "Focus on menu-margin awareness rather than predicting exact ingredient costs.",
+      "Be cautious with promo commitments that depend on volatile inputs when risk is Elevated/Critical.",
+      "Re-check supplier quotes closer to order time during higher-pressure periods."
+    ],
+    "suggested_actions": [
+      {
+        "action": "Review margin exposure on high-cost dishes",
+        "when": "If status is Elevated/Critical",
+        "why": "Cost pressure often hits a few key inputs first (proteins, dairy, imported items).",
+        "effort": "Low",
+        "tradeoff": "Requires quick menu-cost check"
+      },
+      {
+        "action": "Avoid locking large forward orders without price confirmation",
+        "when": "If score ≥ 50 (Elevated/Critical)",
+        "why": "Higher volatility can shorten supplier quote windows.",
+        "effort": "Low",
+        "tradeoff": "More frequent ordering/check-ins"
+      },
+      {
+        "action": "Delay promotions that rely on imported inputs",
+        "when": "If FX volatility driver is present",
+        "why": "FX-driven repricing can compress margins unexpectedly.",
+        "effort": "Low",
+        "tradeoff": "Fewer near-term promo options"
+      }
+    ],
+    "trust_note": "This card uses Peru-wide macro indicators (BCRPData) as upstream proxies; it does not use restaurant purchase invoices."
+  }
+}

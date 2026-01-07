@@ -1,0 +1,91 @@
+{
+  "schema_version": "ui-ready-v1",
+  "site_id": "13monjas",
+  "site_name": "13 Monjas",
+  "generated_at_local": "2026-01-06T21:35:21.929786-05:00",
+  "service_window_local": {
+    "start": "16:00",
+    "end": "23:00"
+  },
+  "insight": {
+    "id": "late_arrival_risk",
+    "title": "Late Arrival Risk",
+    "category": "Reservations",
+    "time_horizon": "0–3h",
+    "status": {
+      "level": "Elevated",
+      "icon": "🟠",
+      "score_0_100": 65,
+      "subtitle": "Arrival punctuality risk for the next 0–3 hours",
+      "confidence": "Medium",
+      "confidence_reason": "Traffic and weather outlook are available; confidence depends on short-term traffic volatility."
+    },
+    "summary": "Late arrivals may become more frequent due to volatile traffic and/or weather amplification.",
+    "drivers": [
+      {
+        "label": "Short-term traffic volatility (60m)",
+        "impact": "High"
+      },
+      {
+        "label": "Traffic congestion proxy",
+        "impact": "Low"
+      },
+      {
+        "label": "Rain / precipitation outlook",
+        "impact": "Low"
+      },
+      {
+        "label": "Peak-hour sensitivity",
+        "impact": "Medium"
+      }
+    ],
+    "implications": [
+      "Higher probability of customers arriving late, causing table-sequencing friction.",
+      "Increased variance in seating times can cause knock-on delays during busy periods."
+    ],
+    "supported_considerations": [
+      "Traffic volatility affects punctuality more than steady congestion.",
+      "Rain risk can increase both travel friction and unpredictability."
+    ],
+    "suggested_actions": [
+      {
+        "action": "Send a soft check-in message shortly before reservation time",
+        "when": "10–15 minutes before reservation time",
+        "why": "Reduces uncertainty and allows re-sequencing if guests report delays.",
+        "effort": "Low",
+        "tradeoff": "Adds messaging workload"
+      },
+      {
+        "action": "Use slightly wider buffers for groups of 5+ when volatility is high",
+        "when": "When traffic volatility is Medium/High",
+        "why": "Large groups amplify the operational cost of late arrivals.",
+        "effort": "Low",
+        "tradeoff": "Fewer tightly-packed slots"
+      },
+      {
+        "action": "Avoid scheduling back-to-back reservation start times during peak",
+        "when": "During peak window (19:00–22:00)",
+        "why": "Reduces cascading delays when arrivals cluster or slip.",
+        "effort": "Medium",
+        "tradeoff": "May reduce peak throughput, improves experience"
+      }
+    ],
+    "outlook": "Outlook (0–3h): Conditions are likely to remain similar in the near term.",
+    "trust_note": "This insight is based entirely on external conditions (traffic, weather, timing, location). No internal reservation or customer data is used."
+  },
+  "_internal": {
+    "traffic": {
+      "ratio": 1.0,
+      "congestion": 0.0,
+      "volatility_60m": 0.4285714285714286
+    },
+    "weather": {
+      "rain_likely_next_3h": false,
+      "max_pop_next_3h": 0.0
+    },
+    "flags": {
+      "is_peak_window": true,
+      "is_in_service_window": true
+    }
+  }
+}

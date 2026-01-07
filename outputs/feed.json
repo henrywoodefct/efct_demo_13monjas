@@ -1,0 +1,403 @@
+{
+  "schema_version": "ui-ready-feed-v1",
+  "site_id": "13monjas",
+  "site_name": "13 Monjas",
+  "generated_at_local": "2026-01-06T21:35:24.719659-05:00",
+  "cards": [
+    {
+      "schema_version": "ui-ready-v1",
+      "site_id": "13monjas",
+      "site_name": "13 Monjas",
+      "generated_at_local": "2026-01-06T21:35:24.611371-05:00",
+      "service_window_local": {
+        "start": "16:00",
+        "end": "23:00"
+      },
+      "insight": {
+        "id": "delivery_risk",
+        "title": "Delivery Risk",
+        "category": "Delivery",
+        "time_horizon": "0–3h",
+        "status": {
+          "level": "Normal",
+          "icon": "🟢",
+          "score_0_100": 15,
+          "subtitle": "Delivery variability vs typical conditions",
+          "confidence": "Medium",
+          "confidence_reason": "Traffic and short-term rain outlook are available."
+        },
+        "summary": "External conditions suggest delivery timing may vary with traffic and short-term rain risk.",
+        "drivers": [
+          {
+            "label": "Traffic vs freeflow",
+            "impact": "Low"
+          },
+          {
+            "label": "Rain probability next 3h",
+            "impact": "Low"
+          },
+          {
+            "label": "Last-mile variability",
+            "impact": "Medium"
+          }
+        ],
+        "implications": [
+          "Higher delivery ETA variability can increase customer frustration and remake risk.",
+          "If conditions worsen, batching deliveries may trade speed for reliability."
+        ],
+        "supported_considerations": [
+          "Consider slightly longer quoted ETAs when risk is Elevated/High.",
+          "Prioritize closer zones if conditions deteriorate.",
+          "If rain probability rises, expect slower rider availability and curbside delays."
+        ],
+        "suggested_actions": [
+          {
+            "action": "Add a small buffer to quoted delivery ETA",
+            "when": "If score ≥ 45 (Elevated/High)",
+            "why": "Reduces late-delivery complaints when external variability is high.",
+            "effort": "Low",
+            "tradeoff": "Slightly longer ETA shown"
+          },
+          {
+            "action": "Prioritize nearby delivery zones first",
+            "when": "If traffic ratio < 0.75 or rain pop ≥ 0.30",
+            "why": "Shorter distances are less sensitive to external slowdowns.",
+            "effort": "Low",
+            "tradeoff": "May delay farther zones"
+          }
+        ],
+        "outlook": "Outlook (0–3h): Conditions can shift quickly; re-run the pipeline closer to service.",
+        "trust_note": "This insight uses only external conditions (traffic/weather). No internal order data is used."
+      },
+      "_internal": {
+        "traffic": {
+          "ts_utc": "2026-01-07T02:35:21.929786+00:00",
+          "current_speed_kmh": 21.0,
+          "freeflow_speed_kmh": 21.0,
+          "ratio": 1.0
+        },
+        "weather": {
+          "max_pop_next_3h": 0.0
+        },
+        "score_reasons": {
+          "traffic": "Traffic near freeflow.",
+          "rain": "Very low rain probability."
+        },
+        "flags": {
+          "is_in_service_window": true
+        }
+      }
+    },
+    {
+      "schema_version": "ui-ready-v1",
+      "site_id": "13monjas",
+      "site_name": "13 Monjas",
+      "generated_at_local": "2026-01-06T21:35:21.929786-05:00",
+      "service_window_local": {
+        "start": "16:00",
+        "end": "23:00"
+      },
+      "insight": {
+        "id": "late_arrival_risk",
+        "title": "Late Arrival Risk",
+        "category": "Reservations",
+        "time_horizon": "0–3h",
+        "status": {
+          "level": "Elevated",
+          "icon": "🟠",
+          "score_0_100": 65,
+          "subtitle": "Arrival punctuality risk for the next 0–3 hours",
+          "confidence": "Medium",
+          "confidence_reason": "Traffic and weather outlook are available; confidence depends on short-term traffic volatility."
+        },
+        "summary": "Late arrivals may become more frequent due to volatile traffic and/or weather amplification.",
+        "drivers": [
+          {
+            "label": "Short-term traffic volatility (60m)",
+            "impact": "High"
+          },
+          {
+            "label": "Traffic congestion proxy",
+            "impact": "Low"
+          },
+          {
+            "label": "Rain / precipitation outlook",
+            "impact": "Low"
+          },
+          {
+            "label": "Peak-hour sensitivity",
+            "impact": "Medium"
+          }
+        ],
+        "implications": [
+          "Higher probability of customers arriving late, causing table-sequencing friction.",
+          "Increased variance in seating times can cause knock-on delays during busy periods."
+        ],
+        "supported_considerations": [
+          "Traffic volatility affects punctuality more than steady congestion.",
+          "Rain risk can increase both travel friction and unpredictability."
+        ],
+        "suggested_actions": [
+          {
+            "action": "Send a soft check-in message shortly before reservation time",
+            "when": "10–15 minutes before reservation time",
+            "why": "Reduces uncertainty and allows re-sequencing if guests report delays.",
+            "effort": "Low",
+            "tradeoff": "Adds messaging workload"
+          },
+          {
+            "action": "Use slightly wider buffers for groups of 5+ when volatility is high",
+            "when": "When traffic volatility is Medium/High",
+            "why": "Large groups amplify the operational cost of late arrivals.",
+            "effort": "Low",
+            "tradeoff": "Fewer tightly-packed slots"
+          },
+          {
+            "action": "Avoid scheduling back-to-back reservation start times during peak",
+            "when": "During peak window (19:00–22:00)",
+            "why": "Reduces cascading delays when arrivals cluster or slip.",
+            "effort": "Medium",
+            "tradeoff": "May reduce peak throughput, improves experience"
+          }
+        ],
+        "outlook": "Outlook (0–3h): Conditions are likely to remain similar in the near term.",
+        "trust_note": "This insight is based entirely on external conditions (traffic, weather, timing, location). No internal reservation or customer data is used."
+      },
+      "_internal": {
+        "traffic": {
+          "ratio": 1.0,
+          "congestion": 0.0,
+          "volatility_60m": 0.4285714285714286
+        },
+        "weather": {
+          "rain_likely_next_3h": false,
+          "max_pop_next_3h": 0.0
+        },
+        "flags": {
+          "is_peak_window": true,
+          "is_in_service_window": true
+        }
+      }
+    },
+    {
+      "schema_version": "ui-ready-v1",
+      "site_id": "13monjas",
+      "site_name": "13 Monjas",
+      "generated_at_local": "2026-01-06T21:35:24.719659-05:00",
+      "service_window_local": {
+        "start": "16:00",
+        "end": "23:00"
+      },
+      "insight": {
+        "id": "logistics_cost_pressure_risk",
+        "title": "Logistics Cost Pressure Risk",
+        "category": "Logistics",
+        "time_horizon": "7–30d",
+        "status": {
+          "level": "Normal",
+          "icon": "🟢",
+          "score_0_100": 5,
+          "subtitle": "External cost signals look stable.",
+          "confidence": 0.85,
+          "confidence_reason": "Food inflation series available (BCRPData). Transport cost proxy series available (BCRPData). FX series available; volatility computed from recent daily data."
+        },
+        "summary": "External indicators (food inflation, transport cost pressure, and FX volatility) suggest how likely suppliers are to reprice or tighten terms in the coming weeks.",
+        "drivers": [
+          "Macro cost indicators are within normal ranges; repricing risk appears low."
+        ],
+        "implications": [
+          "Higher cost pressure can reduce price-lock windows and increase quote variability.",
+          "Margin sensitivity rises on imported or freight-heavy inputs during Elevated/Critical periods."
+        ],
+        "supported_considerations": [
+          "Focus on menu-margin awareness rather than predicting exact ingredient costs.",
+          "Be cautious with promo commitments that depend on volatile inputs when risk is Elevated/Critical.",
+          "Re-check supplier quotes closer to order time during higher-pressure periods."
+        ],
+        "suggested_actions": [
+          {
+            "action": "Review margin exposure on high-cost dishes",
+            "when": "If status is Elevated/Critical",
+            "why": "Cost pressure often hits a few key inputs first (proteins, dairy, imported items).",
+            "effort": "Low",
+            "tradeoff": "Requires quick menu-cost check"
+          },
+          {
+            "action": "Avoid locking large forward orders without price confirmation",
+            "when": "If score ≥ 50 (Elevated/Critical)",
+            "why": "Higher volatility can shorten supplier quote windows.",
+            "effort": "Low",
+            "tradeoff": "More frequent ordering/check-ins"
+          },
+          {
+            "action": "Delay promotions that rely on imported inputs",
+            "when": "If FX volatility driver is present",
+            "why": "FX-driven repricing can compress margins unexpectedly.",
+            "effort": "Low",
+            "tradeoff": "Fewer near-term promo options"
+          }
+        ],
+        "trust_note": "This card uses Peru-wide macro indicators (BCRPData) as upstream proxies; it does not use restaurant purchase invoices."
+      }
+    },
+    {
+      "schema_version": "ui-ready-v1",
+      "site_id": "13monjas",
+      "site_name": "13 Monjas",
+      "generated_at_local": "2026-01-06T21:35:21.929786-05:00",
+      "service_window_local": {
+        "start": "16:00",
+        "end": "23:00"
+      },
+      "insight": {
+        "id": "reservation_flow_risk",
+        "title": "Reservation Flow Risk",
+        "category": "Reservations",
+        "time_horizon": "0–3h",
+        "status": {
+          "level": "Elevated",
+          "icon": "🟠",
+          "score_0_100": 58,
+          "subtitle": "Compared to a normal evening",
+          "confidence": "Medium",
+          "confidence_reason": "Traffic baseline and weather context are available; confidence depends on short-term volatility."
+        },
+        "summary": "Arrival times are less predictable than usual, increasing the risk of overlapping reservations during peak service hours.",
+        "drivers": [
+          {
+            "label": "Traffic vs baseline",
+            "impact": "Low"
+          },
+          {
+            "label": "Short-term volatility (60m)",
+            "impact": "High"
+          },
+          {
+            "label": "Rain amplification risk",
+            "impact": "Low"
+          },
+          {
+            "label": "Peak-hour sensitivity",
+            "impact": "Medium"
+          },
+          {
+            "label": "Large-group sensitivity (>=5)",
+            "impact": "Medium"
+          }
+        ],
+        "implications": [
+          "Higher likelihood of reservation overlap and queue spillover during peak hours.",
+          "Greater sensitivity to delays for larger groups."
+        ],
+        "supported_considerations": [
+          "Wider buffers for larger groups may reduce cascading delays.",
+          "Greater flexibility during peak windows may be more valuable than usual.",
+          "Proactive expectation-setting may reduce frustration if delays occur."
+        ],
+        "suggested_actions": [
+          {
+            "action": "Add a buffer for groups of 5+ during the next 3 hours",
+            "when": "Any booking in the next 3 hours for 5+ guests",
+            "why": "Large groups create longer seating/ordering latency and amplify small arrival delays.",
+            "effort": "Low",
+            "tradeoff": "Slightly fewer slots, smoother flow"
+          },
+          {
+            "action": "Proactively confirm late arrivals with a soft message",
+            "when": "10–15 minutes before reservation time",
+            "why": "Reduces uncertainty and helps resequence tables if someone is running late.",
+            "effort": "Low",
+            "tradeoff": "Adds messaging workload"
+          },
+          {
+            "action": "Avoid tight back-to-back reservations during peak window",
+            "when": "During peak window (19:00–22:00)",
+            "why": "When arrivals cluster, tighter sequencing increases queue spillover risk.",
+            "effort": "Medium",
+            "tradeoff": "May reduce peak throughput, improves experience"
+          }
+        ],
+        "outlook": "Outlook (0–3h): Conditions are likely to remain similar in the near term.",
+        "trust_note": "This insight is based entirely on external conditions (traffic, weather, timing, location). No internal reservation or customer data is used."
+      },
+      "_internal": {
+        "traffic": {
+          "current_ratio": 1.0,
+          "baseline_ratio": 1.0,
+          "deviation": 0.0,
+          "volatility_60m": 0.4285714285714286
+        },
+        "weather": {
+          "rain_now": false,
+          "rain_reason": "No rain detected.",
+          "max_pop_next_3h": 0.0
+        },
+        "flags": {
+          "is_peak_window": true,
+          "is_in_service_window": true
+        }
+      }
+    }
+  ],
+  "rollups": {
+    "overall_status": "Elevated",
+    "counts_by_level": {
+      "Normal": 2,
+      "Watch": 0,
+      "Elevated": 2,
+      "Critical": 0
+    },
+    "top_actions": [
+      {
+        "action": "Send a soft check-in message shortly before reservation time",
+        "when": "10–15 minutes before reservation time",
+        "why": "Reduces uncertainty and allows re-sequencing if guests report delays.",
+        "urgency": "Now",
+        "effort": "Low",
+        "tradeoff": "Adds messaging workload",
+        "source": {
+          "insight_id": "late_arrival_risk",
+          "insight_title": "Late Arrival Risk",
+          "category": "Reservations",
+          "status_level": "Elevated",
+          "score_0_100": 65,
+          "generated_at_local": "2026-01-06T21:35:21.929786-05:00"
+        }
+      },
+      {
+        "action": "Proactively confirm late arrivals with a soft message",
+        "when": "10–15 minutes before reservation time",
+        "why": "Reduces uncertainty and helps resequence tables if someone is running late.",
+        "urgency": "Now",
+        "effort": "Low",
+        "tradeoff": "Adds messaging workload",
+        "source": {
+          "insight_id": "reservation_flow_risk",
+          "insight_title": "Reservation Flow Risk",
+          "category": "Reservations",
+          "status_level": "Elevated",
+          "score_0_100": 58,
+          "generated_at_local": "2026-01-06T21:35:21.929786-05:00"
+        }
+      },
+      {
+        "action": "Use slightly wider buffers for groups of 5+ when volatility is high",
+        "when": "When traffic volatility is Medium/High",
+        "why": "Large groups amplify the operational cost of late arrivals.",
+        "urgency": "Next 3h",
+        "effort": "Low",
+        "tradeoff": "Fewer tightly-packed slots",
+        "source": {
+          "insight_id": "late_arrival_risk",
+          "insight_title": "Late Arrival Risk",
+          "category": "Reservations",
+          "status_level": "Elevated",
+          "score_0_100": 65,
+          "generated_at_local": "2026-01-06T21:35:21.929786-05:00"
+        }
+      }
+    ],
+    "urgency_summary": "2 Now • 1 Next 3h",
+    "summary": "Elevated risk tonight: disruptions are likely; prioritize buffers and proactive messaging to protect reservations."
+  }
+}

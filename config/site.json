@@ -1,0 +1,9 @@
+{
+  "site_id": "13monjas",
+  "site_name": "13 Monjas",
+  "lat": -16.3989,
+  "lon": -71.5369,
+  "timezone": "America/Lima",
+  "service_window": { "start_hour": 16, "end_hour": 23 },
+  "peak_window": { "start_hour": 19, "end_hour": 22 }
+}
